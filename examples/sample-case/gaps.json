@@ -1,0 +1,21 @@
+[
+  {
+    "affected_event_ids": [
+      "evt-575f432e5261a0b6"
+    ],
+    "derivation": {
+      "rule_id": "gap-unresolved-parent",
+      "rule_version": "1.0.0"
+    },
+    "description": "Process record names a parent process, but no compatible parent event was imported.",
+    "evidence_ids": [
+      "evt-575f432e5261a0b6"
+    ],
+    "gap_id": "gap-8bb40b3c9ff1029a",
+    "impact": "moderate",
+    "reason": "identity_ambiguity",
+    "schema_version": "1.0",
+    "suggested_next_evidence": "Earlier process creation records or process lifetime telemetry",
+    "type": "unresolved_parent_process_reference"
+  }
+]

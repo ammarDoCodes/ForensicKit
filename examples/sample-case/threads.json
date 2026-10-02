@@ -1,0 +1,83 @@
+[
+  {
+    "confidence": "moderate",
+    "confidence_factors": [
+      "file_process_path_and_time:moderate",
+      "parent_child_process:moderate",
+      "process_network_link:moderate",
+      "session_membership:moderate",
+      "temporal_proximity:weak",
+      "user_session_attribution:moderate"
+    ],
+    "contradiction_ids": [],
+    "derivation": {
+      "algorithm": "thread-builder",
+      "version": "1.0.0"
+    },
+    "entity_ids": [
+      "device:workstation-7:usb\\vid_0781&pid_5567\\sn001",
+      "domain:example.invalid",
+      "file:workstation-7:c:\\users\\j.smith\\downloads\\suspicious.exe",
+      "host:workstation-7",
+      "ip:203.0.113.20",
+      "process:workstation-7:pid:4140",
+      "process:workstation-7:pid:4200",
+      "session:workstation-7:0x31f2",
+      "user:workstation-7:j.smith"
+    ],
+    "event_ids": [
+      "evt-fe5bb1fd7c0cbf8a",
+      "evt-ce9c43cf1563252c",
+      "evt-68d8986db027f773",
+      "evt-575f432e5261a0b6",
+      "evt-17d3a6b79c8dbde6",
+      "evt-1c74de9fe05fb0fa",
+      "evt-1c98e235116272e8"
+    ],
+    "gap_ids": [
+      "gap-8bb40b3c9ff1029a"
+    ],
+    "relationship_ids": [
+      "rel-13069cae9c470318",
+      "rel-3abdae5ac9bc8779",
+      "rel-5742f1a8354f5727",
+      "rel-6e75e2ca522492cb",
+      "rel-6f5509fe9a2343ba",
+      "rel-8f9a4bc92b57e32e",
+      "rel-98a6928d2e4af5e9",
+      "rel-a1fa84eafc177179",
+      "rel-a69904a42310a0b0",
+      "rel-b0df55a889237a8d",
+      "rel-b3b13b09b8eb1239",
+      "rel-b82bc57e1c05cf35",
+      "rel-b86ec13b12b5d091",
+      "rel-c0b4768cef38c893",
+      "rel-de34b6804f9ce8b5",
+      "rel-e52cb4fa36175104",
+      "rel-ee3ae6114a743499",
+      "rel-f00ff4514125e2f9",
+      "rel-f04bdf8eb4fadf3c"
+    ],
+    "rule_ids": [
+      "file_process_path_and_time",
+      "parent_child_process",
+      "process_network_link",
+      "session_membership",
+      "temporal_proximity",
+      "user_session_attribution"
+    ],
+    "schema_version": "1.0",
+    "status": "candidate",
+    "supporting_evidence_ids": [
+      "evt-fe5bb1fd7c0cbf8a",
+      "evt-ce9c43cf1563252c",
+      "evt-68d8986db027f773",
+      "evt-575f432e5261a0b6",
+      "evt-17d3a6b79c8dbde6",
+      "evt-1c74de9fe05fb0fa",
+      "evt-1c98e235116272e8"
+    ],
+    "thread_id": "thread-480684a7cfa884e2",
+    "title": "Candidate: logon → device connect → file create"
+  }
+]

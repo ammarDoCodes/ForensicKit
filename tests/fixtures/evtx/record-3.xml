@@ -1,0 +1,17 @@
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+  <System>
+    <Provider Name="Microsoft-Windows-Sysmon" />
+    <EventID>3</EventID>
+    <TimeCreated SystemTime="2026-09-21T16:44:00.000Z" />
+    <Computer>LAB-WIN-01</Computer>
+    <EventRecordID>1004</EventRecordID>
+    <Channel>Microsoft-Windows-Sysmon/Operational</Channel>
+  </System>
+  <EventData>
+    <Data Name="User">alice</Data>
+    <Data Name="ProcessId">4660</Data>
+    <Data Name="Image">C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe</Data>
+    <Data Name="DestinationIp">203.0.113.10</Data>
+    <Data Name="DestinationPort">443</Data>
+  </EventData>
+</Event>

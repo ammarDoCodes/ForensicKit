@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://forensickit.local/schemas/graph.schema.json",
+  "title": "ForensicKit bounded evidence graph response",
+  "type": "object",
+  "required": ["schema_version", "start", "depth", "nodes", "edges", "result_bounds"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "start": {
+      "type": "object",
+      "required": ["type", "id", "node_id"],
+      "properties": {
+        "type": {"enum": ["entity", "event", "thread"]},
+        "id": {"type": "string"},
+        "node_id": {"type": "string"}
+      },
+      "additionalProperties": false
+    },
+    "depth": {"type": "integer", "minimum": 0, "maximum": 3},
+    "nodes": {"type": "array", "items": {"$ref": "#/$defs/node"}},
+    "edges": {"type": "array", "items": {"$ref": "#/$defs/edge"}},
+    "node_ids": {"type": "array", "items": {"type": "string"}},
+    "edge_ids": {"type": "array", "items": {"type": "string"}},
+    "available_filters": {"type": "object"},
+    "result_bounds": {"type": "object"}
+  },
+  "$defs": {
+    "node": {
+      "type": "object",
+      "required": ["schema_version", "node_id", "kind", "node_type", "object_id", "depth", "observed", "derived", "evidence_ids", "direct_evidence_ids"],
+      "properties": {
+        "schema_version": {"const": "1.0"},
+        "node_id": {"type": "string"},
+        "kind": {"type": "string"},
+        "node_type": {"type": "string"},
+        "object_id": {"type": "string"},
+        "depth": {"type": "integer", "minimum": 0},
+        "observed": {"type": "boolean"},
+        "derived": {"type": "boolean"},
+        "evidence_ids": {"type": "array", "items": {"type": "string"}},
+        "direct_evidence_ids": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": true
+    },
+    "edge": {
+      "type": "object",
+      "required": ["schema_version", "edge_id", "edge_type", "from", "to", "confidence", "observed", "derived", "evidence_ids", "direct_evidence_ids"],
+      "properties": {
+        "schema_version": {"const": "1.0"},
+        "edge_id": {"type": "string"},
+        "edge_type": {"type": "string"},
+        "from": {"type": "string"},
+        "to": {"type": "string"},
+        "confidence": {"type": "string"},
+        "observed": {"type": "boolean"},
+        "derived": {"type": "boolean"},
+        "evidence_ids": {"type": "array", "items": {"type": "string"}},
+        "direct_evidence_ids": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

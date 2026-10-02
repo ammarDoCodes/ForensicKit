@@ -1,0 +1,1 @@
+{"$schema":"https://json-schema.org/draft/2020-12/schema","title":"ForensicKit analyst note","type":"object","required":["schema_version","note_id","text","provenance"],"properties":{"schema_version":{"const":"1.0"},"note_id":{"type":"string"},"text":{"type":"string"}}}

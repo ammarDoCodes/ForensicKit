@@ -1,0 +1,19 @@
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+  <System>
+    <Provider Name="Microsoft-Windows-Security-Auditing" />
+    <EventID>4688</EventID>
+    <TimeCreated SystemTime="2026-09-21T16:42:00.000Z" />
+    <Computer>LAB-WIN-01</Computer>
+    <EventRecordID>1002</EventRecordID>
+    <Channel>Security</Channel>
+    <Security UserID="S-1-5-18" />
+  </System>
+  <EventData>
+    <Data Name="SubjectUserName">alice</Data>
+    <Data Name="SubjectLogonId">0x100</Data>
+    <Data Name="NewProcessId">4660</Data>
+    <Data Name="NewProcessName">C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe</Data>
+    <Data Name="CommandLine">powershell.exe -NoProfile -File C:\\Users\\alice\\review.ps1</Data>
+    <Data Name="Creator_Process_Id">1111</Data>
+  </EventData>
+</Event>

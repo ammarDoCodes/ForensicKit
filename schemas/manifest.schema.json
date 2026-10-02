@@ -1,0 +1,1 @@
+{"$schema":"https://json-schema.org/draft/2020-12/schema","title":"ForensicKit case manifest","type":"object","required":["schema_version","case_id","created_at_utc","import_batch_id","analysis_config_hash","inputs"],"properties":{"schema_version":{"const":"1.0"},"case_id":{"type":"string"},"import_batch_id":{"type":"string"},"inputs":{"type":"array"}}}

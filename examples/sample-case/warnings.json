@@ -1,0 +1,10 @@
+[
+  {
+    "code": "MALFORMED_JSON",
+    "message": "Record is not valid JSON: Expecting value.",
+    "schema_version": "1.0",
+    "severity": "warning",
+    "source_file_id": "file-ac760ac9b2f18798",
+    "source_locator": "record[8]"
+  }
+]

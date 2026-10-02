@@ -1,0 +1,1 @@
+{"$schema":"https://json-schema.org/draft/2020-12/schema","title":"ForensicKit investigation decision","type":"object","required":["schema_version","decision_id","statement","status","evidence_ids","provenance"],"properties":{"schema_version":{"const":"1.0"},"status":{"enum":["open","in_review","closed"]},"evidence_ids":{"type":"array"}}}

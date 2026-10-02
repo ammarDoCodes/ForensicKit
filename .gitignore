@@ -1,0 +1,29 @@
+# Python-generated files
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+
+# Local development environments and build output
+.venv/
+venv/
+.forensickit-evtx-env/
+build/
+dist/
+*.egg-info/
+
+# Ephemeral standard-library test workspaces
+forensickit-test-run-*/
+.fk-test-run-*/
+
+# Disposable local analysis and benchmark outputs
+.forensickit-benchmark/
+.forensickit-dense-benchmark/
+verification-case/
+my-case/
+evtx-case/
+
+# Local-only evidence and account material
+*.evtx
+*.EVTX
+local-evidence/

@@ -1,0 +1,68 @@
+{
+  "schema_version": "1.0",
+  "parser": "evtx",
+  "parser_version": "1.1.0",
+  "fixtures": [
+    {
+      "label": "public-sysmon-transient",
+      "family": ["sysmon-process", "sysmon-network"],
+      "event_ids": ["1", "3"],
+      "path_name": "Microsoft-Windows-Sysmon-Operational.evtx",
+      "sha256": "447c1d3084b919244696adec7c541873778b60b35daaf35c539582fe8e66287b",
+      "committed": false,
+      "local_only": false,
+      "source": "Public python-evtx test data used transiently for decoder validation.",
+      "redistribution_status": "not-retained",
+      "privacy_review": "No private host Security or PowerShell log was copied.",
+      "validation_status": "binary_validated_recorded",
+      "expected": {
+        "event_count": 7,
+        "event_counts": {"1": 6, "3": 1},
+        "warning_count": 162,
+        "deterministic": true
+      }
+    },
+    {
+      "label": "approved-windows-security-local",
+      "family": ["windows-security-logon"],
+      "event_ids": ["4624", "4625"],
+      "path_name": "Security.evtx",
+      "sha256": null,
+      "committed": false,
+      "local_only": true,
+      "source": "Approved local fixture supplied by the reviewer.",
+      "redistribution_status": "local-only",
+      "privacy_review": "Required before use; do not commit or copy host evidence.",
+      "validation_status": "pending_approved_binary_fixture",
+      "expected": {"event_ids": ["4624", "4625"]}
+    },
+    {
+      "label": "approved-windows-process-local",
+      "family": ["windows-process"],
+      "event_ids": ["4688"],
+      "path_name": "Security.evtx",
+      "sha256": null,
+      "committed": false,
+      "local_only": true,
+      "source": "Approved local fixture supplied by the reviewer.",
+      "redistribution_status": "local-only",
+      "privacy_review": "Required before use; do not commit or copy host evidence.",
+      "validation_status": "pending_approved_binary_fixture",
+      "expected": {"event_ids": ["4688"]}
+    },
+    {
+      "label": "approved-powershell-local",
+      "family": ["powershell"],
+      "event_ids": ["4103", "4104"],
+      "path_name": "PowerShell.evtx",
+      "sha256": null,
+      "committed": false,
+      "local_only": true,
+      "source": "Approved local fixture supplied by the reviewer.",
+      "redistribution_status": "local-only",
+      "privacy_review": "Required before use; do not commit or copy host evidence.",
+      "validation_status": "pending_approved_binary_fixture",
+      "expected": {"event_ids": ["4103", "4104"]}
+    }
+  ]
+}

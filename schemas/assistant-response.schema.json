@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://forensickit.local/schemas/assistant-response.schema.json",
+  "title": "ForensicKit Assistant Response",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["assistant_schema_version", "status", "answer", "observed_facts", "inferences", "uncertainties", "follow_up_questions"],
+  "properties": {
+    "assistant_schema_version": {"type": "string"},
+    "status": {"enum": ["answer", "insufficient_evidence", "disabled"]},
+    "answer": {"type": "string"},
+    "observed_facts": {"type": "array", "items": {"$ref": "#/$defs/fact"}},
+    "inferences": {"type": "array", "items": {"$ref": "#/$defs/inference"}},
+    "uncertainties": {"type": "array", "items": {"$ref": "#/$defs/uncertainty"}},
+    "follow_up_questions": {"type": "array", "items": {"type": "string"}},
+    "validation": {"type": "object"}
+  },
+  "$defs": {
+    "fact": {"type": "object", "required": ["text", "evidence_ids"], "properties": {"text": {"type": "string"}, "evidence_ids": {"type": "array", "items": {"type": "string"}}, "source": {"type": "string"}}},
+    "inference": {"type": "object", "required": ["text", "evidence_ids", "confidence"], "properties": {"text": {"type": "string"}, "evidence_ids": {"type": "array", "items": {"type": "string"}}, "confidence": {"enum": ["unknown", "weak", "moderate", "high"]}}},
+    "uncertainty": {"type": "object", "required": ["text"], "properties": {"text": {"type": "string"}, "gap_ids": {"type": "array", "items": {"type": "string"}}, "contradiction_ids": {"type": "array", "items": {"type": "string"}}}}
+  }
+}

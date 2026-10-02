@@ -1,0 +1,16 @@
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+  <System>
+    <Provider Name="Microsoft-Windows-PowerShell" />
+    <EventID>4104</EventID>
+    <TimeCreated SystemTime="2026-09-21T16:43:00.000Z" />
+    <Computer>LAB-WIN-01</Computer>
+    <EventRecordID>1003</EventRecordID>
+    <Channel>Microsoft-Windows-PowerShell/Operational</Channel>
+  </System>
+  <EventData>
+    <Data Name="User">alice</Data>
+    <Data Name="LogonId">0x100</Data>
+    <Data Name="ProcessId">4660</Data>
+    <Data Name="ScriptBlockText">Get-Process -Id 4660</Data>
+  </EventData>
+</Event>

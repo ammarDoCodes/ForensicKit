@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ForensicKit Workbench</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <section id="auth-screen" class="auth-shell" aria-labelledby="auth-title" hidden>
+    <div class="auth-brand"><img class="brand-mark" src="/logo-mark.svg" width="48" height="42" alt=""><span><strong>ForensicKit</strong><small>Local investigation workbench</small></span></div>
+    <main class="auth-card">
+      <p class="eyebrow">LOCAL ANALYST ACCESS</p>
+      <h1 id="auth-title">Secure your investigation workspace</h1>
+      <p class="auth-intro">Sign-in stays on this computer. Evidence is not sent to an identity service.</p>
+      <div id="auth-message" class="auth-message" role="status" aria-live="polite" hidden></div>
+      <form id="setup-form" class="form-stack auth-form" hidden>
+        <h2>First-run account setup</h2>
+        <p class="quiet">Create the local analyst account. No default username or password is supplied.</p>
+        <label>One-time setup code<input name="setup_code" type="password" autocomplete="one-time-code" required maxlength="128" aria-describedby="setup-code-help"></label>
+        <p id="setup-code-help" class="field-help">The code is shown in the local ForensicKit launch window or terminal. It is not returned by the workbench API.</p>
+        <label>Analyst username<input name="username" autocomplete="username" required minlength="3" maxlength="64" pattern="[A-Za-z0-9._-]+"></label>
+        <label>Password<input name="password" type="password" autocomplete="new-password" required minlength="12" maxlength="1024"></label>
+        <label>Confirm password<input name="password_confirm" type="password" autocomplete="new-password" required minlength="12" maxlength="1024"></label>
+        <button class="button primary" type="submit">Create local account</button>
+      </form>
+      <form id="login-form" class="form-stack auth-form" hidden>
+        <h2>Sign in</h2>
+        <label>Analyst username<input name="username" autocomplete="username" required minlength="3" maxlength="64"></label>
+        <label>Password<input name="password" type="password" autocomplete="current-password" required maxlength="1024"></label>
+        <button class="button primary" type="submit">Sign in to case</button>
+      </form>
+      <p class="auth-local-note"><span aria-hidden="true">●</span> Local access gate · loopback only · source evidence remains read-only</p>
+      <p class="auth-limitation">This login controls access through ForensicKit. It does not protect case files from people or processes that already have access to this Windows account or filesystem.</p>
+    </main>
+    <footer class="auth-footer">Offline by default · No external identity provider · No analytics</footer>
+  </section>
+
+  <div id="workbench-shell" hidden>
+  <a class="skip-link" href="#main-content">Skip to workspace</a>
+  <header class="topbar">
+    <div class="brand-lockup">
+      <img class="brand-mark" src="/logo-mark.svg" width="48" height="42" alt="">
+      <div class="brand-copy">
+        <p class="eyebrow">LOCAL FORENSIC REVIEW</p>
+        <h1>ForensicKit <span>Workbench</span></h1>
+        <p class="topbar-subtitle">Evidence review and investigation workspace</p>
+      </div>
+    </div>
+    <div class="case-badge" aria-label="Active case">
+      <span class="case-mark" aria-hidden="true">◈</span>
+      <span class="case-meta">
+        <span class="case-label">ACTIVE CASE</span>
+        <span id="case-id" class="case-id">Loading case…</span>
+      </span>
+      <span id="connection-state" class="status-dot is-pending" aria-live="polite">Connecting</span>
+    </div>
+    <div class="topbar-actions">
+      <span id="signed-in-as" class="signed-in-as"></span>
+      <div class="theme-switcher" role="group" aria-label="Color theme">
+        <button type="button" class="theme-choice" data-theme-choice="light" aria-label="Use light theme" aria-pressed="false" title="Light theme"><span aria-hidden="true">☀</span></button>
+        <button type="button" class="theme-choice" data-theme-choice="dark" aria-label="Use dark theme" aria-pressed="false" title="Dark theme"><span aria-hidden="true">☾</span></button>
+        <button type="button" class="theme-choice" data-theme-choice="system" aria-label="Use system theme" aria-pressed="true" title="Follow system theme"><span aria-hidden="true">◐</span></button>
+      </div>
+      <button id="logout-button" class="button secondary" type="button">Sign out</button>
+    </div>
+  </header>
+
+  <nav id="workbench-nav" class="nav" aria-label="Workbench views">
+    <div class="nav-header">
+      <div class="nav-brand"><img class="nav-brand-mark" src="/logo-mark.svg" width="36" height="32" alt=""><span>ForensicKit<small>Offline workbench</small></span></div>
+      <button id="nav-collapse" class="nav-collapse" type="button" aria-label="Collapse navigation" aria-expanded="true" aria-controls="workbench-nav" title="Collapse navigation"><span aria-hidden="true">‹</span></button>
+    </div>
+    <div class="nav-section-label">Case review</div>
+    <button type="button" class="nav-button active" data-view="overview" aria-label="Overview" title="Overview" aria-current="page" aria-keyshortcuts="1"><span class="nav-icon" aria-hidden="true">⌂</span><span class="nav-label">Overview</span><span id="nav-overview-count" class="nav-count"></span><kbd>1</kbd></button>
+    <button type="button" class="nav-button" data-view="timeline" aria-label="Timeline" title="Timeline" aria-keyshortcuts="2"><span class="nav-icon" aria-hidden="true">◷</span><span class="nav-label">Timeline</span><span id="nav-timeline-count" class="nav-count"></span><kbd>2</kbd></button>
+    <button type="button" class="nav-button" data-view="threads" aria-label="Candidate threads" title="Candidate threads" aria-keyshortcuts="3"><span class="nav-icon" aria-hidden="true">≋</span><span class="nav-label">Candidate threads</span><span id="nav-threads-count" class="nav-count"></span><kbd>3</kbd></button>
+    <button type="button" class="nav-button" data-view="graph" aria-label="Evidence graph" title="Evidence graph" aria-keyshortcuts="4"><span class="nav-icon" aria-hidden="true">⌘</span><span class="nav-label">Evidence graph</span><span id="nav-graph-count" class="nav-count"></span><kbd>4</kbd></button>
+    <button type="button" class="nav-button" data-view="pivot" aria-label="Entity pivot" title="Entity pivot" aria-keyshortcuts="5"><span class="nav-icon" aria-hidden="true">◎</span><span class="nav-label">Entity pivot</span><span id="nav-pivot-count" class="nav-count"></span><kbd>5</kbd></button>
+    <div class="nav-section-label">Analyst tools</div>
+    <button type="button" class="nav-button" data-view="investigation" aria-label="Investigation" title="Investigation" aria-keyshortcuts="6"><span class="nav-icon" aria-hidden="true">✎</span><span class="nav-label">Investigation</span><span id="nav-investigation-count" class="nav-count"></span><kbd>6</kbd></button>
+    <button type="button" class="nav-button" data-view="reports" aria-label="Reports" title="Reports" aria-keyshortcuts="7"><span class="nav-icon" aria-hidden="true">⇩</span><span class="nav-label">Reports</span><span class="nav-count nav-status">LOCAL</span><kbd>7</kbd></button>
+    <button type="button" class="nav-button" data-view="assistant" aria-label="Assistant, disabled by default" title="Assistant, disabled by default" aria-keyshortcuts="8"><span class="nav-icon" aria-hidden="true">✦</span><span class="nav-label">Assistant</span><span class="nav-count nav-status">OFF</span><kbd>8</kbd></button>
+    <div class="nav-footer"><span class="nav-footer-dot"></span><span>Source evidence is read-only</span></div>
+    <div class="nav-hint">Use 1–8 to switch views</div>
+  </nav>
+
+  <main id="main-content" tabindex="-1">
+    <div id="app-error" class="banner error" role="alert" hidden></div>
+
+    <section id="overview-view" class="view">
+      <div class="section-heading section-heading--overview">
+        <div><p class="eyebrow">CASE OVERVIEW</p><h2>Evidence health and analysis scope</h2></div>
+        <div class="section-actions"><span id="overview-version" class="quiet"></span><button type="button" class="button secondary nav-jump" data-view="timeline">Open timeline</button><button type="button" class="button secondary nav-jump" data-view="threads">Review threads</button><button type="button" class="button secondary nav-jump" data-view="reports">Export report</button></div>
+      </div>
+      <div class="review-strip"><span class="review-strip-icon">✓</span><div><strong>Local review mode</strong><span>Analysis is offline, provenance-preserving, and read-only with respect to source evidence.</span></div></div>
+      <div id="count-cards" class="cards"></div>
+      <div class="two-column">
+        <article class="panel"><h3>Imported inputs</h3><div id="inputs-table" class="table-wrap"></div></article>
+        <article class="panel"><h3>Analysis configuration</h3><pre id="config-view" class="code-block">Loading…</pre></article>
+      </div>
+      <article class="panel"><div class="panel-heading"><h3>Parser warnings</h3><span id="warning-count" class="badge"></span></div><div id="warnings-list"></div></article>
+    </section>
+
+    <section id="timeline-view" class="view" hidden>
+      <div class="section-heading"><div><p class="eyebrow">TIMELINE</p><h2>Canonical events</h2></div><span id="timeline-count" class="quiet"></span></div>
+      <article class="panel filters">
+        <label>Event type<select id="filter-event-type"><option value="">All types</option></select></label>
+        <label>Host<input id="filter-host" type="search" placeholder="host id"></label>
+        <label>User<input id="filter-user" type="search" placeholder="user or entity"></label>
+        <label>Entity<input id="filter-entity" type="search" placeholder="entity id"></label>
+        <label>Derived confidence<select id="filter-confidence"><option value="">All confidence</option><option>high</option><option>moderate</option><option>weak</option><option>unknown</option></select></label>
+        <button id="clear-filters" class="button secondary">Clear</button>
+      </article>
+      <div id="timeline-list" class="stack"></div>
+    </section>
+
+    <section id="threads-view" class="view" hidden>
+      <div class="section-heading"><div><p class="eyebrow">RECONSTRUCTION</p><h2>Candidate incident threads</h2></div><span id="thread-count" class="quiet"></span></div>
+      <div id="thread-list" class="stack"></div>
+      <article id="thread-detail" class="panel detail-panel" hidden></article>
+    </section>
+
+    <section id="graph-view" class="view" hidden>
+      <div class="section-heading"><div><p class="eyebrow">BOUNDED EVIDENCE GRAPH</p><h2>Read-only relationship view</h2></div><span id="graph-count" class="quiet"></span></div>
+      <article class="panel">
+        <p class="quiet">The graph is a deterministic projection of canonical evidence and derived relationships. It does not change stored case data.</p>
+        <div class="filters graph-controls">
+          <label>Start type<select id="graph-start-type"><option value="entity">Entity</option><option value="event">Event</option><option value="thread">Candidate thread</option></select></label>
+          <label>Start object<select id="graph-start"></select></label>
+          <label>Expansion depth<select id="graph-depth"><option value="1" selected>1 — one hop</option><option value="2">2 — bounded</option><option value="3">3 — bounded</option></select></label>
+          <label>Relationship type<input id="graph-relationship-type" type="search" placeholder="optional type"></label>
+          <label>Confidence<select id="graph-confidence"><option value="">All confidence</option></select></label>
+          <label>Entity type<select id="graph-entity-type"><option value="">All entity types</option></select></label>
+          <label>Thread membership<select id="graph-thread"><option value="">All threads</option></select></label>
+          <button id="load-graph" class="button primary">Load graph</button>
+          <button id="reset-graph" class="button secondary">Reset</button>
+        </div>
+      </article>
+      <div id="graph-warnings"></div>
+      <article class="panel graph-panel">
+        <div class="graph-legend" aria-label="Graph legend">
+          <span class="legend-item observed-key">Observed evidence</span>
+          <span class="legend-item derived-key">Derived relationship</span>
+          <span class="legend-item gap-key">Evidence gap</span>
+          <span class="legend-item contradiction-key">Contradiction</span>
+          <span class="legend-item uncertain-key">Time uncertain</span>
+        </div>
+        <div class="graph-scroll"><svg id="graph-svg" viewBox="0 0 1100 680" role="img" aria-label="Bounded evidence graph"></svg></div>
+      </article>
+      <article id="graph-detail" class="panel detail-panel" hidden>
+        <div class="panel-heading"><h3>Selected graph object</h3><span class="quiet">Select a node or edge</span></div>
+        <div id="graph-detail-content"></div>
+      </article>
+    </section>
+
+    <section id="pivot-view" class="view" hidden>
+      <div class="section-heading"><div><p class="eyebrow">ENTITY PIVOT</p><h2>Bounded graph exploration</h2></div></div>
+      <article class="panel filters pivot-controls">
+        <label>Entity<select id="pivot-entity"></select></label>
+        <label>Expansion depth<select id="pivot-depth"><option value="0">0 — direct</option><option value="1" selected>1 — one hop</option><option value="2">2 — bounded</option><option value="3">3 — bounded</option></select></label>
+        <button id="run-pivot" class="button primary">Pivot</button>
+      </article>
+      <div id="pivot-result" class="stack"></div>
+    </section>
+
+    <section id="investigation-view" class="view" hidden>
+      <div class="section-heading"><div><p class="eyebrow">ANALYST WORKSPACE</p><h2>Hypotheses, notes, and decisions</h2></div></div>
+      <div class="two-column">
+        <article class="panel">
+          <h3>Create hypothesis</h3>
+          <form id="hypothesis-form" class="form-stack">
+            <label>Statement<textarea name="statement" required maxlength="20000"></textarea></label>
+            <label>Status<select name="status"><option>open</option><option>in_review</option><option>supported</option><option>weakened</option><option>accepted</option><option>rejected</option><option>inconclusive</option></select></label>
+            <label>Supporting evidence IDs<input name="supporting_evidence_ids" placeholder="comma-separated IDs"></label>
+            <label>Weakening evidence IDs<input name="weakening_evidence_ids" placeholder="comma-separated IDs"></label>
+            <label>Unresolved gap IDs<input name="unresolved_gap_ids" placeholder="comma-separated IDs"></label>
+            <button class="button primary" type="submit">Create hypothesis</button>
+          </form>
+        </article>
+        <article class="panel">
+          <h3>Add analyst note</h3>
+          <form id="note-form" class="form-stack">
+            <label>Note<textarea name="text" required maxlength="20000"></textarea></label>
+            <label>Target type<input name="target_type" placeholder="event, thread, entity"></label>
+            <label>Target ID<input name="target_id" placeholder="optional evidence or entity ID"></label>
+            <button class="button primary" type="submit">Save note</button>
+          </form>
+          <hr>
+          <h3>Record decision</h3>
+          <form id="decision-form" class="form-stack">
+            <label>Decision<textarea name="statement" required maxlength="20000"></textarea></label>
+            <label>Status<select name="status"><option>open</option><option>in_review</option><option>closed</option></select></label>
+            <label>Evidence IDs<input name="evidence_ids" placeholder="comma-separated IDs"></label>
+            <label>Rationale<textarea name="rationale" maxlength="20000"></textarea></label>
+            <button class="button primary" type="submit">Save decision</button>
+          </form>
+        </article>
+      </div>
+      <div class="two-column">
+        <article class="panel"><h3>Hypotheses</h3><div id="hypotheses-list"></div></article>
+        <article class="panel"><h3>Notes and decisions</h3><div id="notes-list"></div><div id="decisions-list"></div></article>
+      </div>
+    </section>
+
+    <section id="reports-view" class="view" hidden>
+      <div class="section-heading"><div><p class="eyebrow">OFFLINE REPORT EXPORT</p><h2>Prepare an investigation report</h2></div><span class="quiet">Deterministic · redacted · source-safe</span></div>
+      <div class="review-strip"><span class="review-strip-icon">✓</span><div><strong>Export does not change the case</strong><span>Reports are built from existing canonical data. Raw evidence payloads are omitted, source files are never written, and the browser receives only a generated download.</span></div></div>
+      <form id="report-form" class="panel form-stack">
+        <div class="report-options">
+          <label>Report scope<select id="report-scope" name="scope"><option value="case">Complete case</option><option value="investigation">Investigation workspace</option><option value="thread">Candidate thread</option><option value="hypothesis">Hypothesis</option></select></label>
+          <label id="report-scope-id-wrap" hidden>Selected object<select id="report-scope-id" name="scope_id"></select></label>
+          <label>Format<select id="report-format" name="format"><option value="html">Self-contained HTML</option><option value="json">Machine-readable JSON</option><option value="markdown">Markdown</option></select></label>
+        </div>
+        <fieldset class="redaction-fieldset">
+          <legend>Redaction controls</legend>
+          <p class="field-help">Paths are redacted by default. Selected values are labeled <code>[REDACTED:category]</code>; that is different from a missing value.</p>
+          <div class="redaction-options">
+            <label class="checkbox-label"><input type="checkbox" name="redactions" value="path" checked disabled> Paths and filenames · always redacted</label>
+            <label class="checkbox-label"><input type="checkbox" name="redactions" value="user"> Usernames and accounts</label>
+            <label class="checkbox-label"><input type="checkbox" name="redactions" value="command_line"> Command lines</label>
+            <label class="checkbox-label"><input type="checkbox" name="redactions" value="ip"> IP addresses</label>
+            <label class="checkbox-label"><input type="checkbox" name="redactions" value="domain"> Domains</label>
+            <label class="checkbox-label"><input type="checkbox" name="redactions" value="host"> Hostnames</label>
+            <label class="checkbox-label"><input type="checkbox" name="redactions" value="device"> Device identifiers</label>
+            <label class="checkbox-label"><input type="checkbox" name="redactions" value="text"> Analyst-authored text</label>
+          </div>
+        </fieldset>
+        <div class="report-actions"><button id="report-download" class="button primary" type="submit">Prepare and download report</button><span class="quiet">The complete download is limited to 8 MiB in the workbench; use the CLI for larger reports.</span></div>
+      </form>
+      <article id="report-result" class="panel detail-panel" aria-live="polite" hidden></article>
+    </section>
+
+    <section id="assistant-view" class="view" hidden>
+      <div class="section-heading"><div><p class="eyebrow">OPTIONAL EVIDENCE-GROUNDED ASSISTANT</p><h2>Bounded local review help</h2></div><span class="quiet">Disabled by default</span></div>
+      <article class="panel">
+        <p class="quiet">The assistant receives only a bounded canonical context. Evidence text and analyst notes remain untrusted data. The offline fake provider is deterministic and never sends evidence to a service.</p>
+        <form id="assistant-form" class="form-stack">
+          <label>Task<select id="assistant-task" name="task"><option value="summarize_thread">Summarize selected context</option><option value="explain_relationship">Explain a relationship</option><option value="compare_hypotheses">Compare hypotheses</option><option value="explain_gaps">Explain gaps and contradictions</option><option value="suggest_evidence">Suggest additional evidence</option><option value="summarize_report">Summarize a report section</option></select></label>
+          <label>Context<select id="assistant-selection-type" name="selection_type"><option value="case">Case</option><option value="thread">Candidate thread</option><option value="replay">Thread replay</option><option value="hypothesis">Hypothesis</option><option value="entity">Entity</option><option value="report">Report section</option></select></label>
+          <label>Context ID<input id="assistant-selection-id" name="selection_id" placeholder="required for thread, hypothesis, or entity"></label>
+          <label>Comparison hypothesis ID<input id="assistant-compare-hypothesis-id" name="compare_hypothesis_id" placeholder="optional second hypothesis"></label>
+          <label>Report section<select id="assistant-report-section" name="report_section"><option value="">All selected context</option><option value="events">Events</option><option value="threads">Threads</option><option value="relationships">Relationships</option><option value="evidence_gaps">Evidence gaps</option><option value="contradictions">Contradictions</option><option value="investigation">Investigation objects</option><option value="graph">Graph</option></select></label>
+          <label>Question<textarea id="assistant-question" name="question" required maxlength="4000" placeholder="Ask a bounded, evidence-focused question."></textarea></label>
+          <label class="checkbox-label"><input id="assistant-offline" type="checkbox"> Enable deterministic offline provider</label>
+          <label>Redaction categories<input id="assistant-redactions" name="redactions" placeholder="user, path, command_line, ip, domain"></label>
+          <button class="button primary" type="submit">Ask assistant</button>
+        </form>
+      </article>
+      <article id="assistant-result" class="panel detail-panel" hidden></article>
+    </section>
+
+    <aside id="provenance-panel" class="provenance panel" hidden>
+      <div class="panel-heading"><h3>Provenance</h3><button id="close-provenance" class="icon-button" aria-label="Close provenance">×</button></div>
+      <div id="provenance-content"></div>
+    </aside>
+  </main>
+  </div>
+  <script src="/app.js" defer></script>
+</body>
+</html>

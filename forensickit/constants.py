@@ -1,0 +1,9 @@
+SCHEMA_VERSION = "1.0"
+PARSER_NAME = "jsonl-evidence"
+PARSER_VERSION = "1.0.0"
+PARSER_VERSIONS = {"jsonl-evidence": "1.0.0", "json-array-evidence": "1.0.0", "csv-evidence": "1.0.0", "windows-event-xml": "1.0.0", "sysmon-xml": "1.0.0", "sysmon-json": "1.0.0", "evtx": "1.1.0"}
+RULE_VERSION = "1.0.0"
+THREAD_VERSION = "1.0.0"
+DERIVED_FILES = {"manifest.json", "analysis-config.json", "normalized-events.jsonl", "entities.json", "relationships.jsonl", "threads.json", "gaps.json", "contradictions.json", "warnings.json", "hypotheses.json", "notes.json", "decisions.json", "assistant-audit.jsonl"}
+EVENT_TYPE_ALIASES = {"logon": "logon", "logon_success": "logon", "interactive_logon": "logon", "process": "process_start", "process_create": "process_start", "process_creation": "process_start", "process_start": "process_start", "powershell": "powershell_activity", "powershell_start": "powershell_activity", "powershell_activity": "powershell_activity", "network": "network_connection", "network_connection": "network_connection", "net_connection": "network_connection", "file_create": "file_create", "file_created": "file_create", "download": "file_create", "file_delete": "file_delete", "file_deleted": "file_delete", "usb": "device_connect", "usb_connect": "device_connect", "device_connect": "device_connect", "device": "device_observation", "device_observation": "device_observation"}
+EVENT_TIME_KEYS = ("timestamp", "time", "datetime", "observed_at", "created_at", "occurred_at")

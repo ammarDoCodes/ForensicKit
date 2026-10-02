@@ -1,0 +1,1 @@
+{"$schema":"https://json-schema.org/draft/2020-12/schema","title":"ForensicKit candidate thread","type":"object","required":["schema_version","thread_id","title","status","confidence","event_ids","entity_ids","relationship_ids","derivation"],"properties":{"schema_version":{"const":"1.0"},"status":{"const":"candidate"},"confidence":{"enum":["high","moderate","weak","unknown"]}}}

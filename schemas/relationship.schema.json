@@ -1,0 +1,1 @@
+{"$schema":"https://json-schema.org/draft/2020-12/schema","title":"ForensicKit relationship","type":"object","required":["schema_version","relationship_id","type","from","to","strength","explanation","rule_id","rule_version","evidence_ids"],"properties":{"schema_version":{"const":"1.0"},"strength":{"enum":["high","moderate","weak","unknown"]}}}

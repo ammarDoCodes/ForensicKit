@@ -1,0 +1,18 @@
+{
+  "analysis_config_hash": "sha256:83f9584b9f436eea7a0c075174ea3be22c38ef8eb77651bcc6f432ba8283ef46",
+  "case_id": "case-0c61e9303e9c",
+  "created_at_utc": "2026-09-21T18:48:41.516218Z",
+  "import_batch_id": "batch-b7d85d4649b3d61c",
+  "inputs": [
+    {
+      "detected_format": "jsonl-evidence",
+      "file_id": "file-ac760ac9b2f18798",
+      "parser": "jsonl-evidence",
+      "parser_version": "1.0.0",
+      "relative_path": "events.jsonl",
+      "sha256": "354a80bda9587a6292f58eb9945626923248236920b0b7c6cdeff34a3c71e8e6",
+      "size_bytes": 1495
+    }
+  ],
+  "schema_version": "1.0"
+}

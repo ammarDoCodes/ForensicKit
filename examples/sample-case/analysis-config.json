@@ -1,0 +1,21 @@
+{
+  "limits": {
+    "evtx_record_bytes": 2097152,
+    "evtx_record_count": 250000,
+    "file_process_seconds": 3600,
+    "temporal_proximity_seconds": 300
+  },
+  "parser_versions": {
+    "csv-evidence": "1.0.0",
+    "evtx": "1.1.0",
+    "json-array-evidence": "1.0.0",
+    "jsonl-evidence": "1.0.0",
+    "sysmon-json": "1.0.0",
+    "sysmon-xml": "1.0.0",
+    "windows-event-xml": "1.0.0"
+  },
+  "rule_versions": {
+    "core-correlation": "1.0.0"
+  },
+  "schema_version": "1.0"
+}

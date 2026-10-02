@@ -1,0 +1,3 @@
+# Isolated binary-EVTX validation dependency.
+# Keep this exact pin aligned with [project.optional-dependencies].
+python-evtx==0.8.1

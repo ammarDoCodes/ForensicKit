@@ -1,0 +1,328 @@
+[
+  {
+    "display_name": "usb\\vid_0781&pid_5567\\sn001",
+    "entity_id": "device:workstation-7:usb\\vid_0781&pid_5567\\sn001",
+    "event_ids": [
+      "evt-ce9c43cf1563252c"
+    ],
+    "identifiers": [
+      {
+        "confidence": "medium",
+        "kind": "device_id",
+        "value": "usb\\vid_0781&pid_5567\\sn001"
+      }
+    ],
+    "provenance": {
+      "derivation": {
+        "algorithm": "entity-extractor",
+        "version": "1.0.0"
+      },
+      "source_event_ids": [
+        "evt-ce9c43cf1563252c"
+      ]
+    },
+    "schema_version": "1.0",
+    "type": "device"
+  },
+  {
+    "display_name": "example.invalid",
+    "entity_id": "domain:example.invalid",
+    "event_ids": [
+      "evt-1c74de9fe05fb0fa"
+    ],
+    "identifiers": [
+      {
+        "confidence": "high",
+        "kind": "domain",
+        "value": "example.invalid"
+      }
+    ],
+    "provenance": {
+      "derivation": {
+        "algorithm": "entity-extractor",
+        "version": "1.0.0"
+      },
+      "source_event_ids": [
+        "evt-1c74de9fe05fb0fa"
+      ]
+    },
+    "schema_version": "1.0",
+    "type": "domain"
+  },
+  {
+    "display_name": "C:\\Users\\j.smith\\Downloads\\suspicious.exe",
+    "entity_id": "file:workstation-7:c:\\users\\j.smith\\downloads\\suspicious.exe",
+    "event_ids": [
+      "evt-1c98e235116272e8",
+      "evt-68d8986db027f773"
+    ],
+    "identifiers": [
+      {
+        "confidence": "high",
+        "kind": "path",
+        "value": "c:\\users\\j.smith\\downloads\\suspicious.exe"
+      }
+    ],
+    "provenance": {
+      "derivation": {
+        "algorithm": "entity-extractor",
+        "version": "1.0.0"
+      },
+      "source_event_ids": [
+        "evt-1c98e235116272e8",
+        "evt-68d8986db027f773"
+      ]
+    },
+    "schema_version": "1.0",
+    "type": "file"
+  },
+  {
+    "display_name": "workstation-7",
+    "entity_id": "host:workstation-7",
+    "event_ids": [
+      "evt-17d3a6b79c8dbde6",
+      "evt-1c74de9fe05fb0fa",
+      "evt-1c98e235116272e8",
+      "evt-575f432e5261a0b6",
+      "evt-68d8986db027f773",
+      "evt-ce9c43cf1563252c",
+      "evt-fe5bb1fd7c0cbf8a"
+    ],
+    "identifiers": [
+      {
+        "confidence": "high",
+        "kind": "hostname",
+        "value": "workstation-7"
+      }
+    ],
+    "provenance": {
+      "derivation": {
+        "algorithm": "entity-extractor",
+        "version": "1.0.0"
+      },
+      "source_event_ids": [
+        "evt-17d3a6b79c8dbde6",
+        "evt-1c74de9fe05fb0fa",
+        "evt-1c98e235116272e8",
+        "evt-575f432e5261a0b6",
+        "evt-68d8986db027f773",
+        "evt-ce9c43cf1563252c",
+        "evt-fe5bb1fd7c0cbf8a"
+      ]
+    },
+    "schema_version": "1.0",
+    "type": "host"
+  },
+  {
+    "display_name": "203.0.113.20",
+    "entity_id": "ip:203.0.113.20",
+    "event_ids": [
+      "evt-1c74de9fe05fb0fa"
+    ],
+    "identifiers": [
+      {
+        "confidence": "high",
+        "kind": "ip",
+        "value": "203.0.113.20"
+      }
+    ],
+    "provenance": {
+      "derivation": {
+        "algorithm": "entity-extractor",
+        "version": "1.0.0"
+      },
+      "source_event_ids": [
+        "evt-1c74de9fe05fb0fa"
+      ]
+    },
+    "schema_version": "1.0",
+    "type": "ip"
+  },
+  {
+    "display_name": "suspicious.exe",
+    "entity_id": "process:workstation-7:pid:4140",
+    "event_ids": [
+      "evt-575f432e5261a0b6"
+    ],
+    "identifiers": [
+      [
+        {
+          "confidence": "medium",
+          "kind": "pid",
+          "scope": "workstation-7",
+          "value": "4140"
+        },
+        {
+          "confidence": "medium",
+          "kind": "image",
+          "value": "suspicious.exe"
+        }
+      ]
+    ],
+    "provenance": {
+      "derivation": {
+        "algorithm": "entity-extractor",
+        "version": "1.0.0"
+      },
+      "source_event_ids": [
+        "evt-575f432e5261a0b6"
+      ]
+    },
+    "schema_version": "1.0",
+    "type": "process"
+  },
+  {
+    "display_name": "powershell.exe",
+    "entity_id": "process:workstation-7:pid:4200",
+    "event_ids": [
+      "evt-17d3a6b79c8dbde6",
+      "evt-1c74de9fe05fb0fa"
+    ],
+    "identifiers": [
+      [
+        {
+          "confidence": "medium",
+          "kind": "pid",
+          "scope": "workstation-7",
+          "value": "4200"
+        },
+        {
+          "confidence": "medium",
+          "kind": "image",
+          "value": "powershell.exe"
+        }
+      ],
+      [
+        {
+          "confidence": "medium",
+          "kind": "pid",
+          "scope": "workstation-7",
+          "value": "4200"
+        }
+      ]
+    ],
+    "provenance": {
+      "derivation": {
+        "algorithm": "entity-extractor",
+        "version": "1.0.0"
+      },
+      "source_event_ids": [
+        "evt-17d3a6b79c8dbde6",
+        "evt-1c74de9fe05fb0fa"
+      ]
+    },
+    "schema_version": "1.0",
+    "type": "process"
+  },
+  {
+    "display_name": "0x31f2",
+    "entity_id": "session:workstation-7:0x31f2",
+    "event_ids": [
+      "evt-17d3a6b79c8dbde6",
+      "evt-1c74de9fe05fb0fa",
+      "evt-1c98e235116272e8",
+      "evt-575f432e5261a0b6",
+      "evt-68d8986db027f773",
+      "evt-ce9c43cf1563252c",
+      "evt-fe5bb1fd7c0cbf8a"
+    ],
+    "identifiers": [
+      {
+        "confidence": "high",
+        "kind": "session_id",
+        "value": "0x31f2"
+      }
+    ],
+    "provenance": {
+      "derivation": {
+        "algorithm": "entity-extractor",
+        "version": "1.0.0"
+      },
+      "source_event_ids": [
+        "evt-17d3a6b79c8dbde6",
+        "evt-1c74de9fe05fb0fa",
+        "evt-1c98e235116272e8",
+        "evt-575f432e5261a0b6",
+        "evt-68d8986db027f773",
+        "evt-ce9c43cf1563252c",
+        "evt-fe5bb1fd7c0cbf8a"
+      ]
+    },
+    "schema_version": "1.0",
+    "type": "session"
+  },
+  {
+    "display_name": "events.jsonl",
+    "entity_id": "source:file-ac760ac9b2f18798",
+    "event_ids": [
+      "evt-17d3a6b79c8dbde6",
+      "evt-1c74de9fe05fb0fa",
+      "evt-1c98e235116272e8",
+      "evt-575f432e5261a0b6",
+      "evt-68d8986db027f773",
+      "evt-ce9c43cf1563252c",
+      "evt-fe5bb1fd7c0cbf8a"
+    ],
+    "identifiers": [
+      {
+        "confidence": "high",
+        "kind": "file_id",
+        "value": "file-ac760ac9b2f18798"
+      }
+    ],
+    "provenance": {
+      "derivation": {
+        "algorithm": "entity-extractor",
+        "version": "1.0.0"
+      },
+      "source_event_ids": [
+        "evt-17d3a6b79c8dbde6",
+        "evt-1c74de9fe05fb0fa",
+        "evt-1c98e235116272e8",
+        "evt-575f432e5261a0b6",
+        "evt-68d8986db027f773",
+        "evt-ce9c43cf1563252c",
+        "evt-fe5bb1fd7c0cbf8a"
+      ]
+    },
+    "schema_version": "1.0",
+    "type": "source"
+  },
+  {
+    "display_name": "j.smith",
+    "entity_id": "user:workstation-7:j.smith",
+    "event_ids": [
+      "evt-17d3a6b79c8dbde6",
+      "evt-1c74de9fe05fb0fa",
+      "evt-1c98e235116272e8",
+      "evt-575f432e5261a0b6",
+      "evt-68d8986db027f773",
+      "evt-ce9c43cf1563252c",
+      "evt-fe5bb1fd7c0cbf8a"
+    ],
+    "identifiers": [
+      {
+        "confidence": "medium",
+        "kind": "account",
+        "value": "j.smith"
+      }
+    ],
+    "provenance": {
+      "derivation": {
+        "algorithm": "entity-extractor",
+        "version": "1.0.0"
+      },
+      "source_event_ids": [
+        "evt-17d3a6b79c8dbde6",
+        "evt-1c74de9fe05fb0fa",
+        "evt-1c98e235116272e8",
+        "evt-575f432e5261a0b6",
+        "evt-68d8986db027f773",
+        "evt-ce9c43cf1563252c",
+        "evt-fe5bb1fd7c0cbf8a"
+      ]
+    },
+    "schema_version": "1.0",
+    "type": "user"
+  }
+]

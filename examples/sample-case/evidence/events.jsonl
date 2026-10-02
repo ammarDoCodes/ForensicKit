@@ -1,0 +1,8 @@
+{"event_type":"logon","timestamp":"2026-09-21T09:41:00-07:00","host":"WORKSTATION-7","user":"j.smith","session_id":"0x31f2"}
+{"event_type":"device_connect","timestamp":"2026-09-21T09:43:00-07:00","host":"WORKSTATION-7","user":"j.smith","session_id":"0x31f2","device_id":"USB\\VID_0781&PID_5567\\SN001"}
+{"event_type":"file_create","timestamp":"2026-09-21T09:46:00-07:00","host":"WORKSTATION-7","user":"j.smith","session_id":"0x31f2","file_path":"C:\\Users\\j.smith\\Downloads\\suspicious.exe","action":"created"}
+{"event_type":"process_start","timestamp":"2026-09-21T09:47:00-07:00","host":"WORKSTATION-7","user":"j.smith","session_id":"0x31f2","pid":4140,"image":"suspicious.exe","image_path":"C:\\Users\\j.smith\\Downloads\\suspicious.exe","parent_pid":2120}
+{"event_type":"powershell_activity","timestamp":"2026-09-21T09:48:00-07:00","host":"WORKSTATION-7","user":"j.smith","session_id":"0x31f2","pid":4200,"image":"powershell.exe","command_line":"powershell.exe -NoProfile -Command Get-Process","parent_pid":4140}
+{"event_type":"network_connection","timestamp":"2026-09-21T09:49:00-07:00","host":"WORKSTATION-7","user":"j.smith","session_id":"0x31f2","pid":4200,"remote_ip":"203.0.113.20","remote_domain":"example.invalid"}
+{"event_type":"file_delete","timestamp":"2026-09-21T09:52:00-07:00","host":"WORKSTATION-7","user":"j.smith","session_id":"0x31f2","file_path":"C:\\Users\\j.smith\\Downloads\\suspicious.exe","action":"deleted"}
+this is malformed evidence and should generate a warning
